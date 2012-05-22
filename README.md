@@ -1,67 +1,26 @@
-Fwk Events Utility
+# Fwk Events Utility
 
 Used to dispatch events into PHP Applications.
 
-## Usage
+## Installation
 
-This is really simple and straightforward.
-
-### Adding Listeners
+Via [Composer](http://getcomposer.org):
 
 ```
-<?php
-
-use Fwk\Events\Dispatcher,
-    Fwk\Events\Event;
-
-$evd = new Dispatcher();
-
-// closures listeners
-$evd->on("eventName", function(Fwk\Events\Event $event) {
-    // do some stuff
-});
-
-// Class methods starting by "on[EventCamelCasedName]" can also be added as 
-// listeners
-class MyListener 
 {
-    public function onEventName(Fwk\Events\Event $event) {
-        // do some stuff
+    "require": {
+        "fwk/Events": ">=0.1.0",
     }
 }
 
-$evd->addListener(new MyListener());
-```
-
-### Removing Listeners
+If you don't use Composer, you can still (download)[https://github.com/fwk/Events/zipball/master] this repository and add it
+to your ```include_path``` (PSR-0 compatible)[https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md]
 
 ```
-<?php
 
-/* ... */
+## Usage
 
-// this removes all listeners from the dispatcher
-$evd->removeAllListeners();
-
-// this removes all listeners for a given event
-$evd->removeListeners("eventName");
-```
-
-### Trigger Events
-
-```
-<?php
-
-/* ... */
-
-$event = new Fwk\Events\Event("eventName", array(
-    "someData" => "someValue"
-));
-$event->extraData = "extraValue";
-
-// dispatch event
-$evd->notify($event);
-```
+This is really simple and straightforward. Please see the [Usage Wiki Page](https://github.com/fwk/Events/wiki/Usage)
 
 ## BSD Licence
 
@@ -95,5 +54,4 @@ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 ```
