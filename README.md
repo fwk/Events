@@ -12,15 +12,14 @@ Via [Composer](http://getcomposer.org):
         "fwk/Events": ">=0.1.0",
     }
 }
+```
 
 If you don't use Composer, you can still (download)[https://github.com/fwk/Events/zipball/master] this repository and add it
 to your ```include_path``` (PSR-0 compatible)[https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md]
 
-```
-
 ## Usage
 
-This is really simple and straightforward. Please see the [Usage Wiki Page](https://github.com/fwk/Events/wiki/Usage)
+This is really simple and straightforward. Please refer to the [Usage Wiki Page](https://github.com/fwk/Events/wiki/Usage)
 
 ## BSD Licence
 
