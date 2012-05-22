@@ -1,0 +1,13 @@
+{
+    "name": "fwk/events",
+    "description": "Fwk Events Dispatcher",
+    "authors": [
+        {
+            "name": "neiluJ",
+            "email": "julien@nitronet.org"
+        }
+    ],
+    "require": {
+
+    }
+}
