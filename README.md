@@ -1,5 +1,7 @@
 # Fwk Events Utility
 
+[![Build Status](https://secure.travis-ci.org/fwk/Events.png?branch=master)](http://travis-ci.org/fwk/Events)
+
 Used to dispatch events into PHP Applications.
 
 ## Installation
