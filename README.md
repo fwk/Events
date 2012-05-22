@@ -14,8 +14,8 @@ Via [Composer](http://getcomposer.org):
 }
 ```
 
-If you don't use Composer, you can still (download)[https://github.com/fwk/Events/zipball/master] this repository and add it
-to your ```include_path``` (PSR-0 compatible)[https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md]
+If you don't use Composer, you can still [download](https://github.com/fwk/Events/zipball/master) this repository and add it
+to your ```include_path``` [PSR-0 compatible](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
 
 ## Usage
 
