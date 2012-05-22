@@ -1,6 +1,9 @@
 {
-    "name": "fwk/events",
+    "name": "fwk/Events",
     "description": "Fwk Events Dispatcher",
+    "type": "library",
+    "keywords": ["framework", "events", "dispatcher", "utils"],
+    "license": "BSD",
     "authors": [
         {
             "name": "neiluJ",
@@ -8,6 +11,11 @@
         }
     ],
     "require": {
-
-    }
+        "php": ">=5.2",
+    },
+    "autoload": {
+        "psr-0": {
+            "Fwk\\Events": "src/Events"
+        }
+    },
 }
