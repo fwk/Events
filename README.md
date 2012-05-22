@@ -9,7 +9,6 @@ This is really simple and straightforward.
 ### Adding Listeners
 
 ```
-
 <?php
 
 use Fwk\Events\Dispatcher,
@@ -32,13 +31,11 @@ class MyListener
 }
 
 $evd->addListener(new MyListener());
-
 ```
 
 ### Removing Listeners
 
 ```
-
 <?php
 
 /* ... */
@@ -48,14 +45,11 @@ $evd->removeAllListeners();
 
 // this removes all listeners for a given event
 $evd->removeListeners("eventName");
-
-
 ```
 
 ### Trigger Events
 
 ```
-
 <?php
 
 /* ... */
@@ -67,7 +61,6 @@ $event->extraData = "extraValue";
 
 // dispatch event
 $evd->notify($event);
-
 ```
 
 ## BSD Licence
