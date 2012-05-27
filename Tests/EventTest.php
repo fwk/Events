@@ -2,7 +2,7 @@
 
 namespace Fwk\Events;
 
-require_once __DIR__ .'/../../src/Events/Event.php';
+require_once __DIR__ .'/../Event.php';
 
 /**
  * Test class for Event.

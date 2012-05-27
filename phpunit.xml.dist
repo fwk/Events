@@ -6,7 +6,7 @@
          
 <testsuites>
   <testsuite name="AllTests">
-    <directory>./tests/Events</directory>
+    <directory>./Tests</directory>
   </testsuite>
 </testsuites>
   

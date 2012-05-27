@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Fwk\\Events": "src/Events"
+            "Fwk\\Events": ""
         }
-    }
+    },
+    "target-dir": "Fwk/Events"
 }
