@@ -20,9 +20,9 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * PHP Version 5.3
- * 
+ *
  * @package    Fwk
  * @subpackage Events
  * @author     Julien Ballestracci <julien@nitronet.org>
@@ -43,17 +43,17 @@ class Event extends \ArrayObject
      * @var string
      */
     protected $name;
-    
+
     /**
      * Tells if this event has been processed
-     * 
+     *
      * @var boolean
      */
     protected $processed;
-    
+
     /**
      * Stop propagation ?
-     * 
+     *
      * @var boolean
      */
     protected $stopped;
@@ -61,15 +61,16 @@ class Event extends \ArrayObject
     /**
      * Creates the event with its data
      *
-     * @param string $name
-     * @param array $data
+     * @param  string $name
+     * @param  array  $data
      * @return void
      */
-    public function __construct($name, $data = array()) {
+    public function __construct($name, $data = array())
+    {
         $this->name = $name;
         $this->processed = false;
         $this->stopped = false;
-        
+
         parent::__construct($data);
         $this->setFlags(\ArrayObject::ARRAY_AS_PROPS);
     }
@@ -97,30 +98,30 @@ class Event extends \ArrayObject
     /**
      * Sets the processed flag
      *
-     * @param boolean $processed 
+     * @param  boolean $processed
      * @return Event
      */
     public function setProcessed($processed)
     {
-        $this->processed = (boolean)$processed;
+        $this->processed = (boolean) $processed;
 
         return $this;
     }
-    
+
     /**
      * Stops event propagation
-     * 
+     *
      * @return void
      */
     public function stop()
     {
         $this->stopped = true;
     }
-    
+
     /**
      * Tells if the event has been stopped
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function isStopped()
     {
@@ -129,7 +130,7 @@ class Event extends \ArrayObject
 
     /**
      * Tells if this event has been processed
-     * 
+     *
      * @return boolean
      */
     public function isProcessed()
@@ -139,7 +140,7 @@ class Event extends \ArrayObject
 
     /**
      * Retrieve a variable {$key}
-     * 
+     *
      * @return void
      */
     public function __get($key)
@@ -149,9 +150,9 @@ class Event extends \ArrayObject
 
     /**
      * Sets a variable for this event
-     * 
-     * @param string $key
-     * @param mixed $value
+     *
+     * @param  string $key
+     * @param  mixed  $value
      * @return mixed
      */
     public function __set($key, $value)
@@ -161,8 +162,8 @@ class Event extends \ArrayObject
 
     /**
      * Tells if a variable {$key} exists for this event
-     * 
-     * @param string $key
+     *
+     * @param  string  $key
      * @return boolean
      */
     public function __isset($key)

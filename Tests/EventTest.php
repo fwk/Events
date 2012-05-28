@@ -19,26 +19,30 @@ class EventTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->object = new Event('test.event');
     }
 
     /**
      * @todo Implement testGetName().
      */
-    public function testGetName() {
+    public function testGetName()
+    {
         $this->assertEquals('test.event', $this->object->getName());
     }
 
     /**
      */
-    public function testGetData() {
+    public function testGetData()
+    {
         $this->assertTrue(is_array($this->object->getData()));
     }
 
     /**
      */
-    public function testSetProcessed() {
+    public function testSetProcessed()
+    {
         $this->assertFalse($this->object->isProcessed());
         $this->object->setProcessed(true);
         $this->assertTrue($this->object->isProcessed());

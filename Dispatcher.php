@@ -20,9 +20,9 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * PHP Version 5.3
- * 
+ *
  * @package    Fwk
  * @subpackage Events
  * @author     Julien Ballestracci <julien@nitronet.org>
@@ -35,29 +35,29 @@ namespace Fwk\Events;
 /**
  * This class is an Event Dispatcher
  * It can be herited by other classes or used as-is.
- * 
+ *
  */
 class Dispatcher
 {
     /**
      * Listeners attached to this dispatcher
-     * 
+     *
      * @var array
      */
     protected $listeners;
-    
+
     /**
      * Adds a listener
-     * 
-     * @param string $name    Event name
-     * @param mixed $listener PHP Callable
-     * 
+     *
+     * @param string $name     Event name
+     * @param mixed  $listener PHP Callable
+     *
      * @return boolean
      */
     public function on($name, $listener)
     {
         $name = strtolower($name);
-        if(!isset($this->listeners[$name])) {
+        if (!isset($this->listeners[$name])) {
             $this->listeners[$name] = array();
         }
 
@@ -71,19 +71,19 @@ class Dispatcher
      * event callable
      *
      * @param mixed $listenerObj The listener object
-     * 
+     *
      * @return void
      */
     public function addListener($listenerObj)
     {
-        if(!\is_object($listenerObj)) {
+        if (!\is_object($listenerObj)) {
             throw new \InvalidArgumentException("Argument is not an object");
         }
-        
+
         $reflector      = new \ReflectionObject($listenerObj);
-        foreach($reflector->getMethods() as $method) {
+        foreach ($reflector->getMethods() as $method) {
             $name   = $method->getName();
-            
+
             if(\strpos($name, 'on') !== 0)
                     continue;
 
@@ -97,21 +97,21 @@ class Dispatcher
     /**
      * Removes a specific listener
      *
-     * @param string $name    Event name
-     * @param mixed $listener PHP Callable
-     * 
+     * @param string $name     Event name
+     * @param mixed  $listener PHP Callable
+     *
      * @return boolean
      */
     public function removeListener($name, $listener)
     {
         $name   = strtolower($name);
-        if(!isset($this->listeners[$name])) {
+        if (!isset($this->listeners[$name])) {
             return false;
         }
-        
+
         $del = false;
-        foreach($this->listeners[$name] as $idx => $callable) {
-            if($listener === $callable) {
+        foreach ($this->listeners[$name] as $idx => $callable) {
+            if ($listener === $callable) {
                 unset($this->listeners[$name][$idx]);
                 $del = true;
             }
@@ -122,18 +122,18 @@ class Dispatcher
 
     /**
      * Removes all listeners for a specific event
-     * 
+     *
      * @param string $name Event name
-     * 
+     *
      * @return boolean
      */
     public function removeAllListeners($name)
     {
         $name   = strtolower($name);
-        if(!isset($this->listeners[$name])) {
+        if (!isset($this->listeners[$name])) {
             return false;
         }
-        
+
         unset($this->listeners[$name]);
 
         return true;
@@ -141,23 +141,23 @@ class Dispatcher
 
     /**
      * Notify listeners for a given event
-     * 
+     *
      * @param Event $event The Event to be dispatched
-     * 
+     *
      * @return boolean (true if processed)
      */
     public function notify(Event $event)
     {
         $name = strtolower($event->getName());
         if(!isset($this->listeners[$name]) ||
-                !is_array($this->listeners[$name]) || 
+                !is_array($this->listeners[$name]) ||
                         !count($this->listeners[$name])) {
-            
+
             return false;
         }
-        
-        foreach($this->listeners[$name] as $callable) {
-            if(!$event->isStopped()) {
+
+        foreach ($this->listeners[$name] as $callable) {
+            if (!$event->isStopped()) {
                 \call_user_func($callable, $event);
                 $event->setProcessed(true);
             }
