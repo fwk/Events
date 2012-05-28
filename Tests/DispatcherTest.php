@@ -2,8 +2,11 @@
 
 namespace Fwk\Events;
 
-require_once __DIR__ .'/../Dispatcher.php';
-require_once __DIR__ .'/../Event.php';
+if(!class_exists('\Fwk\Events\Dispatcher'))
+    require_once __DIR__ .'/../Dispatcher.php';
+
+if(!class_exists('\Fwk\Events\Event'))
+    require_once __DIR__ .'/../Event.php';
 
 /**
  * Test class for EventDispatcher.
