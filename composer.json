@@ -1,5 +1,5 @@
 {
-    "name": "fwk/Events",
+    "name": "fwk/events",
     "description": "Fwk Events Dispatcher",
     "type": "library",
     "keywords": ["framework", "events", "dispatcher", "utils"],
