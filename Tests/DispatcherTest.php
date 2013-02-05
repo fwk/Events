@@ -25,13 +25,16 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase {
     protected function setUp()
     {
         $this->object = new Dispatcher;
+        $GLOBALS['testEvent'] = false;
     }
 
     /**
      */
     public function testOn()
     {
-        $this->assertTrue($this->object->on('test.event', array($this, 'eventFunction')));
+        $this->object->on('test.event', array($this, 'eventFunction'));
+        $this->object->notify(new Event('test.event'));
+        $this->assertTrue($GLOBALS['testEvent']);
     }
 
     // test function for event callback
@@ -44,31 +47,36 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase {
      */
     public function testRemoveListener()
     {
-        $this->assertTrue($this->object->on('test.event', array($this, 'eventFunction')));
-
-        $this->assertFalse($this->object->removeListener('test.event', array($this, 'nonExistantListener')));
-        $this->assertTrue($this->object->removeListener('test.event', array($this, 'eventFunction')));
+        $this->object->on('test.event', array($this, 'eventFunction'));
+        $this->object->notify(new Event('test.event'));
+        $this->assertTrue($GLOBALS['testEvent']);
+        
+        $GLOBALS['testEvent'] = false;
+        $this->object->removeListener('test.event', array($this, 'eventFunction'));
+        $this->object->notify(new Event('test.event'));
+        $this->assertFalse($GLOBALS['testEvent']);
     }
 
     /**
      */
     public function testRemoveAllListeners()
     {
-        $this->assertTrue($this->object->on('test.event', array($this, 'eventFunction')));
-
-        $this->assertFalse($this->object->removeAllListeners('non.existent.event'));
-        $this->assertTrue($this->object->removeAllListeners('test.event'));
+        $this->object->on('test.event', array($this, 'eventFunction'));
+        
+        $this->object->removeAllListeners('test.event');
+        $this->object->notify(new Event('test.event'));
+        $this->assertFalse($GLOBALS['testEvent']);
     }
 
     /**
      */
     public function testNotify()
     {
-        $this->assertFalse(isset($GLOBALS['testEvent']));
+        $this->assertFalse($GLOBALS['testEvent']);
         $this->object->on('test.event', array($this, 'eventFunction'));
 
         $this->object->notify($event = new Event('test.event'));
-        $this->assertTrue(isset($GLOBALS['testEvent']));
+        $this->assertTrue($GLOBALS['testEvent']);
         $this->assertTrue($event->isProcessed());
     }
 

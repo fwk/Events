@@ -52,7 +52,7 @@ class Dispatcher
      * @param string $name     Event name
      * @param mixed  $listener PHP Callable
      *
-     * @return boolean
+     * @return Dispatcher
      */
     public function on($name, $listener)
     {
@@ -63,7 +63,7 @@ class Dispatcher
 
         array_push($this->listeners[$name], $listener);
 
-        return true;
+        return $this;
     }
 
     /**
@@ -72,7 +72,7 @@ class Dispatcher
      *
      * @param mixed $listenerObj The listener object
      *
-     * @return void
+     * @return Dispatcher
      */
     public function addListener($listenerObj)
     {
@@ -84,14 +84,17 @@ class Dispatcher
         foreach ($reflector->getMethods() as $method) {
             $name   = $method->getName();
 
-            if(\strpos($name, 'on') !== 0)
-                    continue;
+            if (\strpos($name, 'on') !== 0) {
+                continue;
+            }
 
             $eventName  = strtolower(\substr($name, 2));
             $callable   = array($listenerObj, $name);
 
             $this->on($eventName, $callable);
         }
+        
+        return $this;
     }
 
     /**
@@ -100,24 +103,22 @@ class Dispatcher
      * @param string $name     Event name
      * @param mixed  $listener PHP Callable
      *
-     * @return boolean
+     * @return Dispatcher
      */
     public function removeListener($name, $listener)
     {
         $name   = strtolower($name);
         if (!isset($this->listeners[$name])) {
-            return false;
+            return $this;
         }
 
-        $del = false;
         foreach ($this->listeners[$name] as $idx => $callable) {
             if ($listener === $callable) {
                 unset($this->listeners[$name][$idx]);
-                $del = true;
             }
         }
 
-        return $del;
+        return $this;
     }
 
     /**
@@ -125,35 +126,41 @@ class Dispatcher
      *
      * @param string $name Event name
      *
-     * @return boolean
+     * @return Dispatcher
      */
     public function removeAllListeners($name)
     {
         $name   = strtolower($name);
         if (!isset($this->listeners[$name])) {
-            return false;
+            return $this;
         }
 
         unset($this->listeners[$name]);
 
-        return true;
+        return $this;
     }
 
     /**
      * Notify listeners for a given event
      *
-     * @param Event $event The Event to be dispatched
+     * @param Event $event The Event to be dispatched (or string)
+     * @param array $data  Shortcut when using $event as a string. If an Event
+     * instance is provided, this param will be ignored.
      *
-     * @return boolean (true if processed)
+     * @return Event The event
      */
-    public function notify(Event $event)
+    public function notify($event, array $data = array())
     {
+        if (is_string($event)) {
+            $event = new Event($event, $data);
+        }
+        
         $name = strtolower($event->getName());
-        if(!isset($this->listeners[$name]) ||
-                !is_array($this->listeners[$name]) ||
-                        !count($this->listeners[$name])) {
-
-            return false;
+        if(!isset($this->listeners[$name]) 
+           || !is_array($this->listeners[$name]) 
+           || !count($this->listeners[$name])
+        ) {
+            return $event;
         }
 
         foreach ($this->listeners[$name] as $callable) {
@@ -163,6 +170,6 @@ class Dispatcher
             }
         }
 
-        return true;
+        return $event;
     }
 }
