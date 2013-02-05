@@ -23,7 +23,7 @@ class MyListener
 $evd->addListener(new MyListener());
 ```
 
-### Removing Listeners
+## Removing Listeners
 
 ``` php
 /* ... */
