@@ -78,6 +78,11 @@ $event->extraData = "extraValue";
 $evd->notify($event);
 ```
 
+## Contributions / Community
+
+- Issues on Github: https://github.com/fwk/Events/issues
+- Follow *Fwk* on Twitter: [@phpfwk](https://twitter.com/phpfwk)
+
 ## Legal 
 
 Fwk is licensed under the 3-clauses BSD license. Please read LICENSE for full details.
