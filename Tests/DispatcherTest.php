@@ -8,6 +8,20 @@ if(!class_exists('\Fwk\Events\Dispatcher'))
 if(!class_exists('\Fwk\Events\Event'))
     require_once __DIR__ .'/../Event.php';
 
+
+class MyListenerObj 
+{
+    public function onTestEvent($event)
+    {
+        $event->setProcessed(true);
+    }
+    
+    public function notAListener()
+    {
+        return true;
+    }
+}
+
 /**
  * Test class for EventDispatcher.
  */
@@ -55,6 +69,8 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase {
         $this->object->removeListener('test.event', array($this, 'eventFunction'));
         $this->object->notify(new Event('test.event'));
         $this->assertFalse($GLOBALS['testEvent']);
+        
+        $this->assertInstanceOf('Fwk\Events\Dispatcher', $this->object->removeListener('inexistant.event', array()));
     }
 
     /**
@@ -80,4 +96,27 @@ class DispatcherTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($event->isProcessed());
     }
 
+    public function testStoppedEvent()
+    {
+        $this->assertFalse($GLOBALS['testEvent']);
+        $this->object->on('test.event', function(Event $event) {
+            $event->stop();
+        });
+        $this->object->on('test.event', array($this, 'eventFunction'));
+        $this->object->notify('test.event');
+        $this->assertFalse($GLOBALS['testEvent']); // event was stopped
+    }
+    
+    public function testListenerObject()
+    {
+        $this->object->addListener(new MyListenerObj());
+        $this->object->notify($event = new Event('testEvent'));
+        $this->assertTrue($event->isProcessed());
+    }
+    
+    public function testInvalidListenerObject()
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+        $this->object->addListener(function($event) { return false; });
+    }
 }

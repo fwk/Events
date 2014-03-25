@@ -1,8 +1,14 @@
-# Fwk Events Utility
+# Fwk\Events (Event Dispatcher)
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fwk/Events/badges/quality-score.png?s=fd301aeae2aced90b4005e852c155c6993201f7f)](https://scrutinizer-ci.com/g/fwk/Events/)
 [![Build Status](https://secure.travis-ci.org/fwk/Events.png?branch=master)](http://travis-ci.org/fwk/Events)
+[![Code Coverage](https://scrutinizer-ci.com/g/fwk/Events/badges/coverage.png?s=10519bce46abbba090eb89b007fd831b317c5c59)](https://scrutinizer-ci.com/g/fwk/Events/)
+[![Latest Stable Version](https://poser.pugx.org/fwk/events/v/stable.png)](https://packagist.org/packages/fwk/events) 
+[![Total Downloads](https://poser.pugx.org/fwk/events/downloads.png)](https://packagist.org/packages/fwk/events) 
+[![Latest Unstable Version](https://poser.pugx.org/fwk/events/v/unstable.png)](https://packagist.org/packages/fwk/events) 
+[![License](https://poser.pugx.org/fwk/di/license.png)](https://packagist.org/packages/fwk/events)
 
-Dead Simple Events Dispatcher for PHP.
+Event Dispatcher for PHP 5.3+
 
 ## Installation
 
@@ -11,7 +17,7 @@ Via [Composer](http://getcomposer.org):
 ```
 {
     "require": {
-        "fwk/events": ">=0.1.0",
+        "fwk/events": "dev-master",
     }
 }
 ```
@@ -19,7 +25,7 @@ Via [Composer](http://getcomposer.org):
 If you don't use Composer, you can still [download](https://github.com/fwk/Events/zipball/master) this repository and add it
 to your ```include_path``` [PSR-0 compatible](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
 
-## Usage
+## Documentation
 
 ### Adding Listeners
 
@@ -75,37 +81,3 @@ $evd->notify($event);
 ## Legal 
 
 Fwk is licensed under the 3-clauses BSD license. Please read LICENSE for full details.
-
-```
-Copyright (c) 2012-2013, Julien Ballestracci <julien@nitronet.org>.
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
- * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-
- * Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in
-   the documentation and/or other materials provided with the
-   distribution.
-
- * Neither the name of Julien Ballestracci nor the names of his
-   contributors may be used to endorse or promote products derived
-   from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-```

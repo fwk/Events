@@ -22,7 +22,7 @@ class EventTest extends \PHPUnit_Framework_TestCase {
      */
     protected function setUp()
     {
-        $this->object = new Event('test.event');
+        $this->object = new Event('test.event', array('test' => 'testValue'));
     }
 
     /**
@@ -47,5 +47,17 @@ class EventTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->isProcessed());
         $this->object->setProcessed(true);
         $this->assertTrue($this->object->isProcessed());
+    }
+    
+    public function testDataAsObjectProperties()
+    {
+        $this->assertFalse(isset($this->object->test2));
+        $this->assertTrue(isset($this->object->test));
+        $this->assertEquals('testValue', $this->object->test);
+        $this->assertFalse($this->object->__isset('test2'));
+        $this->assertTrue($this->object->__isset('test'));
+        $this->assertEquals('testValue', $this->object->__get('test'));
+        $this->object->__set('test2', 'testValue2');
+        $this->assertTrue($this->object->__isset('test2'));
     }
 }

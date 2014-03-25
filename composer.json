@@ -1,8 +1,8 @@
 {
     "name": "fwk/events",
-    "description": "Fwk Events Dispatcher",
+    "description": "Fwk Event Dispatcher",
     "type": "library",
-    "keywords": ["framework", "events", "dispatcher", "utils"],
+    "keywords": ["framework", "events", "event", "dispatcher", "utils"],
     "license": "BSD",
     "authors": [
         {

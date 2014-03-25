@@ -23,56 +23,61 @@
  *
  * PHP Version 5.3
  *
- * @package    Fwk
- * @subpackage Events
- * @author     Julien Ballestracci <julien@nitronet.org>
- * @copyright  2011-2012 Julien Ballestracci <julien@nitronet.org>
- * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link       http://www.phpfwk.com
+ * @category  EventDispatcher
+ * @package   Fwk\Events
+ * @author    Julien Ballestracci <julien@nitronet.org>
+ * @copyright 2011-2014 Julien Ballestracci <julien@nitronet.org>
+ * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link      http://www.nitronet.org/fwk
  */
 namespace Fwk\Events;
 
+use \ArrayObject;
+
 /**
+ * Event
+ * 
  * This class represents an Event to be triggered into an EventDispatcher
+ *
+ * @category Event
+ * @package  Fwk\Events
+ * @author   Julien Ballestracci <julien@nitronet.org>
+ * @license  http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link     http://www.nitronet.org/fwk
  */
-class Event extends \ArrayObject
+class Event extends ArrayObject
 {
     /**
      * This event's name
-     *
      * @var string
      */
     protected $name;
 
     /**
      * Tells if this event has been processed
-     *
      * @var boolean
      */
-    protected $processed;
+    protected $processed = false;
 
     /**
      * Stop propagation ?
-     *
      * @var boolean
      */
-    protected $stopped;
+    protected $stopped = false;
 
     /**
-     * Creates the event with its data
+     * Creates the event and attach some data
      *
-     * @param  string $name
-     * @param  array  $data
+     * @param string $name Event name
+     * @param array  $data Event data
+     * 
      * @return void
      */
     public function __construct($name, $data = array())
     {
-        $this->name = $name;
-        $this->processed = false;
-        $this->stopped = false;
-
         parent::__construct($data);
         $this->setFlags(\ArrayObject::ARRAY_AS_PROPS);
+        $this->name = $name;
     }
 
     /**
@@ -98,12 +103,13 @@ class Event extends \ArrayObject
     /**
      * Sets the processed flag
      *
-     * @param  boolean $processed
+     * @param boolean $processed Processed or not
+     * 
      * @return Event
      */
     public function setProcessed($processed)
     {
-        $this->processed = (boolean) $processed;
+        $this->processed = (boolean)$processed;
 
         return $this;
     }
@@ -119,7 +125,7 @@ class Event extends \ArrayObject
     }
 
     /**
-     * Tells if the event has been stopped
+     * Tells if the event is stopped
      *
      * @return boolean
      */
@@ -129,7 +135,7 @@ class Event extends \ArrayObject
     }
 
     /**
-     * Tells if this event has been processed
+     * Tells if this event is processed
      *
      * @return boolean
      */
@@ -139,9 +145,11 @@ class Event extends \ArrayObject
     }
 
     /**
-     * Retrieve a variable {$key}
+     * Retrieve the $key parameter
      *
-     * @return void
+     * @param string $key Parameter name
+     * 
+     * @return mixed
      */
     public function __get($key)
     {
@@ -149,11 +157,12 @@ class Event extends \ArrayObject
     }
 
     /**
-     * Sets a variable for this event
+     * Sets a parameter for this event
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @return mixed
+     * @param string $key   Parameter name
+     * @param mixed  $value Parameter value
+     * 
+     * @return void
      */
     public function __set($key, $value)
     {
@@ -161,9 +170,10 @@ class Event extends \ArrayObject
     }
 
     /**
-     * Tells if a variable {$key} exists for this event
+     * Tells if the $key parameter is defined for this event
      *
-     * @param  string  $key
+     * @param string $key Parameter name
+     * 
      * @return boolean
      */
     public function __isset($key)

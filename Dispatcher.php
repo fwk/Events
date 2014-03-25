@@ -23,25 +23,31 @@
  *
  * PHP Version 5.3
  *
- * @package    Fwk
- * @subpackage Events
- * @author     Julien Ballestracci <julien@nitronet.org>
- * @copyright  2011-2012 Julien Ballestracci <julien@nitronet.org>
- * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link       http://www.phpfwk.com
+ * @category  EventDispatcher
+ * @package   Fwk\Events
+ * @author    Julien Ballestracci <julien@nitronet.org>
+ * @copyright 2011-2014 Julien Ballestracci <julien@nitronet.org>
+ * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link      http://www.nitronet.org/fwk
  */
 namespace Fwk\Events;
 
 /**
+ * Dispatcher
+ * 
  * This class is an Event Dispatcher
  * It can be herited by other classes or used as-is.
  *
+ * @category Dispatcher
+ * @package  Fwk\Events
+ * @author   Julien Ballestracci <julien@nitronet.org>
+ * @license  http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @link     http://www.nitronet.org/fwk
  */
 class Dispatcher
 {
     /**
      * Listeners attached to this dispatcher
-     *
      * @var array
      */
     protected $listeners;
@@ -76,14 +82,13 @@ class Dispatcher
      */
     public function addListener($listenerObj)
     {
-        if (!\is_object($listenerObj)) {
+        if (!\is_object($listenerObj) || $listenerObj instanceof \Closure) {
             throw new \InvalidArgumentException("Argument is not an object");
         }
 
-        $reflector      = new \ReflectionObject($listenerObj);
+        $reflector = new \ReflectionObject($listenerObj);
         foreach ($reflector->getMethods() as $method) {
-            $name   = $method->getName();
-
+            $name       = $method->getName();
             if (\strpos($name, 'on') !== 0) {
                 continue;
             }
@@ -130,11 +135,7 @@ class Dispatcher
      */
     public function removeAllListeners($name)
     {
-        $name   = strtolower($name);
-        if (!isset($this->listeners[$name])) {
-            return $this;
-        }
-
+        $name = strtolower($name);
         unset($this->listeners[$name]);
 
         return $this;
@@ -143,8 +144,8 @@ class Dispatcher
     /**
      * Notify listeners for a given event
      *
-     * @param Event $event The Event to be dispatched (or string)
-     * @param array $data  Shortcut when using $event as a string. If an Event
+     * @param string|Event $event The Event to be dispatched (or event name)
+     * @param array        $data  Shortcut when using $event as a string. If an Event
      * instance is provided, this param will be ignored.
      *
      * @return Event The event
@@ -156,16 +157,16 @@ class Dispatcher
         }
         
         $name = strtolower($event->getName());
-        if(!isset($this->listeners[$name]) 
-           || !is_array($this->listeners[$name]) 
-           || !count($this->listeners[$name])
+        if (!isset($this->listeners[$name]) 
+            || !is_array($this->listeners[$name]) 
+            || !count($this->listeners[$name])
         ) {
             return $event;
         }
 
         foreach ($this->listeners[$name] as $callable) {
             if (!$event->isStopped()) {
-                \call_user_func($callable, $event);
+                call_user_func($callable, $event);
                 $event->setProcessed(true);
             }
         }
