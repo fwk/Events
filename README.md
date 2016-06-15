@@ -2,13 +2,13 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fwk/Events/badges/quality-score.png?s=fd301aeae2aced90b4005e852c155c6993201f7f)](https://scrutinizer-ci.com/g/fwk/Events/)
 [![Build Status](https://secure.travis-ci.org/fwk/Events.png?branch=master)](http://travis-ci.org/fwk/Events)
-[![Code Coverage](https://scrutinizer-ci.com/g/fwk/Events/badges/coverage.png?s=10519bce46abbba090eb89b007fd831b317c5c59)](https://scrutinizer-ci.com/g/fwk/Events/)
+[![Code Coverage](https://scrutinizer-ci.com/g/fwk/Events/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/fwk/Events/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/fwk/events/v/stable.png)](https://packagist.org/packages/fwk/events) 
 [![Total Downloads](https://poser.pugx.org/fwk/events/downloads.png)](https://packagist.org/packages/fwk/events) 
 [![Latest Unstable Version](https://poser.pugx.org/fwk/events/v/unstable.png)](https://packagist.org/packages/fwk/events) 
 [![License](https://poser.pugx.org/fwk/di/license.png)](https://packagist.org/packages/fwk/events)
 
-Event Dispatcher for PHP 5.3+
+Event Dispatcher for PHP 5.4+
 
 ## Installation
 
