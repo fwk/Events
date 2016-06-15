@@ -2,3 +2,5 @@ vendor
 /phpunit.xml
 /build.xml
 /build/
+composer.lock
+build.xml

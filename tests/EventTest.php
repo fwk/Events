@@ -3,7 +3,7 @@
 namespace Fwk\Events;
 
 if(!class_exists('\Fwk\Events\Event'))
-    require_once __DIR__ .'/../Event.php';
+    require_once __DIR__ .'/../src/Event.php';
 
 /**
  * Test class for Event.

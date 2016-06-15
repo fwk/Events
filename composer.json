@@ -1,9 +1,9 @@
 {
     "name": "fwk/events",
-    "description": "Fwk Event Dispatcher",
+    "description": "Lightweight Event Dispatcher for Happy Developers",
     "type": "library",
-    "keywords": ["framework", "events", "event", "dispatcher", "utils"],
-    "license": "BSD",
+    "keywords": ["framework", "events", "event", "dispatcher", "utils", "happy-developer"],
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "neiluJ",
@@ -11,12 +11,16 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.4.0"
     },
     "autoload": {
-        "psr-0": {
-            "Fwk\\Events": ""
+        "psr-4": {
+            "Fwk\\Events\\": "src"
         }
     },
-    "target-dir": "Fwk/Events"
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    }
 }

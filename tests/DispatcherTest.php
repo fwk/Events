@@ -3,10 +3,10 @@
 namespace Fwk\Events;
 
 if(!class_exists('\Fwk\Events\Dispatcher'))
-    require_once __DIR__ .'/../Dispatcher.php';
+    require_once __DIR__ .'/../src/Dispatcher.php';
 
 if(!class_exists('\Fwk\Events\Event'))
-    require_once __DIR__ .'/../Event.php';
+    require_once __DIR__ .'/../src/Event.php';
 
 
 class MyListenerObj 
@@ -28,7 +28,7 @@ class MyListenerObj
 class DispatcherTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var EventDispatcher
+     * @var Dispatcher
      */
     protected $object;
 
